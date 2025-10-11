@@ -8,6 +8,10 @@ let
     };
 in 
 {
+    imports = [
+        ./modules/neovim.nix
+    ];
+
 	home.username = "viniciusith";
 	home.homeDirectory =  "/home/viniciusith";
 	home.stateVersion = "25.05";
