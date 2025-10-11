@@ -24,12 +24,12 @@
 	# };
 	
 
-	services.displayManager.lightdm.enable = true;
 	services.xserver = {
 		enable = true;
 		autoRepeatDelay = 200;
 		autoRepeatInterval = 35;
 		windowManager.qtile.enable = true;
+		displayManager.lightdm.enable = true;
 		# xkb.layout = "us";
 		# xkb.options = "eurosign:e,caps:escape";	
 	};
