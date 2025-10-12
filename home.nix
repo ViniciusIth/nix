@@ -4,7 +4,6 @@ let
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
     create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
     configs = {
-    	nvim = "nvim";
     };
 in 
 {
@@ -28,14 +27,15 @@ in
 	}) configs;
 
 	home.packages = with pkgs; [
-		neovim
 		yazi
-		ripgrep
-		nil
-		nixpkgs-fmt
-		nodejs
-		zig
-		tree-sitter
-		cargo
 	];
+
+    home.shellAliases = {
+      rebuild = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+    };
+
+    home.sessionVariables =
+    {
+      EDITOR = "nvim";
+    }
 }
