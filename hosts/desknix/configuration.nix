@@ -6,7 +6,6 @@
 }: {
 	imports = [
         ./hardware-configuration.nix
-        ../../modules/win-manager/hyprland
     ];
 	
     # Boot configuration

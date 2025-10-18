@@ -9,8 +9,7 @@ in
   home.homeDirectory =  "/home/viniciusith";
 
   imports = [
-    # "../../modules/win-manager/quickshell"
-    # ../../modules/win-manager/hyprland/home.nix
+    ../../modules/neovim
   ];
 
   home.stateVersion = "25.05";

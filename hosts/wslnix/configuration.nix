@@ -4,10 +4,25 @@
   pkgs, 
   ... 
 }: 
+let 
+  nixos-wsl = (builtins.fetchTarball {
+    url = "https://github.com/nix-community/nixos-wsl/archive/eabf2ecbb69a6d501b4e85117f4799e0efb0e889.tar.gz";
+    sha256 = "0khwas4icq6x7xb7gsaqwnihfllfz4cs0rn15xcg9b9vm6vx98dd"; 
+  });
+in
+
 {
   imports = [
     ./hardware-configuration.nix
+    (import "${nixos-wsl}/modules")
   ];
+
+  # WSL-specific configuration
+  wsl = {
+    enable = true;
+    defaultUser = "viniciusith";
+    startMenuLaunchers = true;
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -38,17 +53,12 @@
     bash.completion.enable = true;
   };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
-
-  # WSL-specific configuration
-  wsl = {
-    enable = true;
-    defaultUser = "viniciusith";
-    startMenuLaunchers = true;
-    
-    wslKind = "wsl2";
-  };
 
   users.users.viniciusith = {
     isNormalUser = true;
@@ -60,8 +70,6 @@
     ];
     uid = 1000;
   };
-
-  users.users.nixos = lib.mkForce {};
 
   # DO NOT CHANGE this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.

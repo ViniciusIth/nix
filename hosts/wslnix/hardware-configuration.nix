@@ -1,17 +1,15 @@
-# hosts/wslnix/hardware-configuration.nix
 { config, lib, pkgs, modulesPath, ... }:
 
 {
   imports = [ ];
 
-  # Basic filesystem for root - using the actual device from your df output
+  # Basic filesystem for root - using the actual device from df output
   fileSystems."/" = {
     device = "/dev/sdd";
     fsType = "ext4";
   };
 
   # No other filesystems needed for WSL - WSL handles the rest
-  # Remove any entries for /mnt/wslg/distro, /boot, etc.
 
   # No swap in WSL typically
   swapDevices = [ ];
