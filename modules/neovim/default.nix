@@ -121,7 +121,7 @@
       # LSP & Formatters
       lua-language-server
       nil
-      nixpkgs-fmt
+      alejandra
       
       # Development
       nodejs
