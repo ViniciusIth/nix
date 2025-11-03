@@ -13,6 +13,7 @@ in {
 
   imports = [
     ../../modules/neovim
+    ../../modules/yazi
     ./git
   ];
 
