@@ -42,12 +42,18 @@ in {
     file
     tree
     unzip
+
+    docker-compose
   ];
 
   # Programs
   programs = {
     git.enable = true;
     zsh.enable = true;
+  };
+
+  virtualisation.docker = {
+    enable = true;
   };
 
   fonts.packages = with pkgs; [
