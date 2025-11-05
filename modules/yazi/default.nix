@@ -17,7 +17,7 @@
     recursive = true;
   };
 
-  programs.bash.initExtra = ''
+  programs.zsh.initExtra = ''
     y() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
       yazi "$@" --cwd-file="$tmp"

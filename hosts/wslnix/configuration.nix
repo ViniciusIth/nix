@@ -1,17 +1,14 @@
-{ 
-  config, 
-  lib, 
-  pkgs, 
-  ... 
-}: 
-let 
-  nixos-wsl = (builtins.fetchTarball {
-    url = "https://github.com/nix-community/nixos-wsl/archive/eabf2ecbb69a6d501b4e85117f4799e0efb0e889.tar.gz";
-    sha256 = "0khwas4icq6x7xb7gsaqwnihfllfz4cs0rn15xcg9b9vm6vx98dd"; 
-  });
-in
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  nixos-wsl = builtins.fetchTarball {
+    url = "https://github.com/nix-community/nixos-wsl/archive/eabf2ecbb69a6d501b4e85117f4799e0efb0e889.tar.gz";
+    sha256 = "0khwas4icq6x7xb7gsaqwnihfllfz4cs0rn15xcg9b9vm6vx98dd";
+  };
+in {
   imports = [
     ./hardware-configuration.nix
     (import "${nixos-wsl}/modules")
@@ -24,7 +21,7 @@ in
     startMenuLaunchers = true;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   systemd.services.systemd-logind.restartIfChanged = false;
 
@@ -50,7 +47,7 @@ in
   # Programs
   programs = {
     git.enable = true;
-    bash.completion.enable = true;
+    zsh.enable = true;
   };
 
   fonts.packages = with pkgs; [
@@ -64,11 +61,12 @@ in
     isNormalUser = true;
     description = "ViniciusIth";
     extraGroups = [
-      "wheel" 
-      "docker" 
-      "networkmanager" 
+      "wheel"
+      "docker"
+      "networkmanager"
     ];
     uid = 1000;
+    shell = pkgs.zsh;
   };
 
   # DO NOT CHANGE this value unless you have manually inspected all the changes it would make to your configuration,

@@ -39,7 +39,24 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "unstable": "unstable"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1759909590,
+        "narHash": "sha256-AtsHpH10DH9JiX90JtRPg7OG1GtUSAn3Div9V/sr5ss=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b997b9093d8f8aa685a46b246242403d9e32f0ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b997b9093d8f8aa685a46b246242403d9e32f0ef",
+        "type": "github"
       }
     }
   },

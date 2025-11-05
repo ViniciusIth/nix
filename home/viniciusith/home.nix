@@ -14,6 +14,7 @@ in {
   imports = [
     ../../modules/neovim
     ../../modules/yazi
+    ./zsh
     ./git
   ];
 
