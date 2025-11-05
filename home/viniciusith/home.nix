@@ -16,6 +16,7 @@ in {
     ../../modules/yazi
     ./zsh
     ./git
+    ./zellij
   ];
 
   home.stateVersion = "25.05";

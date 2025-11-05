@@ -2,7 +2,6 @@
   description = "NixOS";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
-    unstable.url = "github:NixOS/nixpkgs/b997b9093d8f8aa685a46b246242403d9e32f0ef";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +24,6 @@
   outputs = inputs @ {
     self,
     nixpkgs,
-    unstable,
     home-manager,
     ...
   }: {
