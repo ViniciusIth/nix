@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  osConfig,
-  ...
-}: let
+{osConfig, ...}: let
   hostname = osConfig.networking.hostName or "unknown";
 in {
   home.username = "viniciusith";
@@ -17,6 +10,7 @@ in {
     ./zsh
     ./git
     ./zellij
+    ./go
   ];
 
   home.stateVersion = "25.05";

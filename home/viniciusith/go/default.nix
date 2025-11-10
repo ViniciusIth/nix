@@ -1,23 +1,21 @@
 {
   config,
   pkgs,
-  upkgs,
   ...
 }: {
-  home.packages = with upkgs; [
-    go
-    gopls
-    golangci-lint
+  home.packages = with pkgs; [
+    gnumake
+    gcc
+    go-swag
+    unstable.air
+    unstable.go
+    unstable.gopls
+    unstable.golangci-lint
   ];
-
-  programs.go = {
-    enable = true;
-    goPath = "${config.home.homeDirectory}/go";
-    goBin = "${config.home.homeDirectory}/go/bin";
-  };
 
   home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/go";
     GOBIN = "${config.home.homeDirectory}/go/bin";
   };
+  home.sessionPath = ["${config.home.homeDirectory}/go/bin"];
 }

@@ -1,5 +1,5 @@
 return {
-    cmd = { 'lua-language-server' },
+    cmd = { 'gopls' },
     filetypes = { "go" },
     root_markers = {
         ".git",
