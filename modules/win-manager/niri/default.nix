@@ -9,7 +9,13 @@
   };
 
   imports = [
+    ./ghostty.nix
   ];
+
+  xdg.configFile."niri" = {
+    source = lib.file.mkOutOfStoreSymlink "/home/viniciusith/dotfiles/config/niri";
+    recursive = true;
+  };
 }
 # Yes — that’s perfect 👍
 # You can absolutely make this work **with your existing `niri/config.kdl`**, and you have **two clean ways** to get `' + c` → `ç` depending on whether you want to modify your layout or just add a Compose rule.
