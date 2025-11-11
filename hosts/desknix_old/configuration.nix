@@ -6,17 +6,39 @@
 }: {
 	imports = [
         ./hardware-configuration.nix
-        ../../modules/win-manager/niri
-
     ];
 	
     # Boot configuration
-      boot.loader = {
+	boot.loader = {
 		systemd-boot.enable = true;
 		efi.canTouchEfiVariables = true;
-      };
-      boot.kernelPackages = pkgs.linuxPackages;
+		# Add timeout for boot menu
+		# systemd-boot.configurationLimit = 10;
+	};
+    boot.kernelPackages = pkgs.linuxPackages;  # Use stable kernel for better NVIDIA support
 
+
+    # NVIDIA configuration
+  #   services.xserver.videoDrivers = [ "nvidia" ]; 
+  #   hardware.nvidia = {
+  #       modesetting.enable = true;
+  #       powerManagement.enable = true; # Disable for laptops
+  #       nvidiaSettings = true;
+  #       package = config.boot.kernelPackages.nvidiaPackages.production;
+		#
+		# powerManagement.finegrained = true;  # Better power management
+		# forceFullCompositionPipeline = true;  # Reduce screen tearing
+  #   };
+
+	# hardware.opengl = {
+	# 	enable = true;
+	# 	driSupport32Bit = true;
+	# 	extraPackages = with pkgs; [
+	# 		nvidia-vaapi-driver
+	# 		vaapiVdpau
+	# 		libvdpau-va-gl
+	# 	];
+	# };
 
     nix = {
 		settings = {
@@ -42,10 +64,6 @@
 		# 	allowedUDPPorts = [ ];
 		# };
 	};
-
-
-        services.xserver.displayManager.lightdm.enable = true;
-        services.xserver.enable = true;
 	
 	time.timeZone = "America/Sao_Paulo";
 	
@@ -56,6 +74,20 @@
 		powerOnBoot = true;  # Ensure Bluetooth starts on boot
 	};
 	services.blueman.enable = true;
+
+    # X11 configuration
+	services.xserver = {
+		# enable = true;
+		# autoRepeatDelay = 200;
+		# autoRepeatInterval = 35;
+		# windowManager.qtile.enable = true;
+		# displayManager.lightdm.enable = true;
+
+        xkb = {
+            layout = "us";
+            variant = "intl";
+        };
+	};
 
     # Audio configuration
     security.rtkit.enable = true;
