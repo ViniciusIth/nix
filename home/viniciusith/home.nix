@@ -11,6 +11,7 @@ in {
     ./git
     ./zellij
     ./go
+    ./bun
   ];
 
   home.stateVersion = "25.05";
