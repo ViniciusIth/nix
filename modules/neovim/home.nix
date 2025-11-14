@@ -1,17 +1,15 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: {
   programs.neovim = {
-    enable = true;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
-      # Icons (only need once)
+      # Icons
       nvim-web-devicons
 
       # Theme
@@ -127,7 +125,7 @@
       tree-sitter
       cargo
 
-      # clipboard
+      # Clipboard
       wl-clipboard
     ];
   };

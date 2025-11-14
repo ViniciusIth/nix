@@ -5,8 +5,9 @@ in {
   home.homeDirectory = "/home/viniciusith";
 
   imports = [
-    ../../modules/neovim
-    ../../modules/yazi
+    ../../modules/neovim/home.nix
+    ../../modules/yazi/home.nix
+    ../../modules/niri/home.nix
     ./zsh
     ./git
     ./zellij
