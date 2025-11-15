@@ -2,8 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/niri/system.nix
-    ../../modules/yazi/system.nix
-    ../../modules/neovim/system.nix
   ];
 
   # Boot configuration
@@ -47,7 +45,7 @@
   hardware.graphics.enable = true;
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true; # Ensure Bluetooth starts on boot
+    powerOnBoot = true;
   };
   services.blueman.enable = true;
 
@@ -98,6 +96,7 @@
     tree
     unzip
   ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Programs
   programs = {

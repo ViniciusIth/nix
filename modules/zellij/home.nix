@@ -1,12 +1,12 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }: {
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
+    attachExistingSession = true;
   };
 
   programs.zsh = {

@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixcord = {
+      url = "github:kaylorben/nixcord/db15ef80264e0c9f60aea019b657e3f9523445bd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -31,6 +35,10 @@
               useUserPackages = true;
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
+
+              sharedModules = [
+                inputs.nixcord.homeModules.nixcord
+              ];
             };
           }
         ];

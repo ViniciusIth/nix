@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   home.packages = with pkgs; [
@@ -16,7 +17,7 @@
     recursive = true;
   };
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = lib.mkOrder 1000 ''
     y() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
       yazi "$@" --cwd-file="$tmp"
