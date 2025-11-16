@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.niri = {
     enable = true;
   };
@@ -16,7 +20,7 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages = [
+  environment.systemPackages = lib.mkAfter [
     pkgs.nautilus # Required for GNOME portal file picker
     pkgs.mako # Notification daemon
     pkgs.wlr-randr # Monitor layout utility

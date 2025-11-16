@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   programs.neovim = {
@@ -92,6 +93,7 @@
         p.nix
         p.proto
         p.python
+        p.qmljs
         p.rust
         p.sql
         p.templ

@@ -13,6 +13,7 @@ in {
     ../../modules/zsh/home.nix
     ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
+    ../../modules/quickshell/home.nix
     ./go
   ];
 

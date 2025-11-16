@@ -11,6 +11,10 @@
       url = "github:kaylorben/nixcord/db15ef80264e0c9f60aea019b657e3f9523445bd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -31,6 +35,9 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              extraSpecialArgs = {
+                inherit inputs;
+              };
               useGlobalPkgs = true;
               useUserPackages = true;
               users.viniciusith = import ./home/viniciusith/home.nix;

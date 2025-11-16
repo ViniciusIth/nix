@@ -67,5 +67,6 @@
     mako
     networkmanagerapplet
     kdePackages.polkit-kde-agent-1
+    kdePackages.dolphin
   ];
 }

@@ -39,6 +39,10 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.enable = true;
 
+  # Auto mount hd
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   time.timeZone = "America/Sao_Paulo";
 
   # Graphics & Bluetooth
@@ -121,6 +125,7 @@
       "video"
       "audio"
       "lp"
+      "plugdev"
     ];
   };
 
