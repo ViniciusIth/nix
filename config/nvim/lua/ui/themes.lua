@@ -38,21 +38,21 @@ require("catppuccin").setup({
         treesitter = true,
         mason = true,
         which_key = true,
-        -- native_lsp = {
-        --     enabled = true,
-        --     virtual_text = {
-        --         errors = { "italic" },
-        --         hints = { "italic" },
-        --         warnings = { "italic" },
-        --         information = { "italic" },
-        --     },
-        --     underlines = {
-        --         errors = { "underline" },
-        --         hints = { "underline" },
-        --         warnings = { "underline" },
-        --         information = { "underline" },
-        --     },
-        -- },
+        native_lsp = {
+            enabled = true,
+            virtual_text = {
+                errors = { "italic" },
+                hints = { "italic" },
+                warnings = { "italic" },
+                information = { "italic" },
+            },
+            underlines = {
+                errors = { "underline" },
+                hints = { "underline" },
+                warnings = { "underline" },
+                information = { "underline" },
+            },
+        },
     },
 })
 

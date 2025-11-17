@@ -27,6 +27,7 @@ in {
 
   networking.hostName = "wslnix";
   networking.firewall.enable = false;
+  networking.nameservers = ["192.168.50.81" "192.168.50.30" "1.1.1.1" "9.9.9.9"];
 
   time.timeZone = "America/Sao_Paulo";
 
