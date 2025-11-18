@@ -5,12 +5,12 @@ in {
   home.homeDirectory = "/home/viniciusith";
 
   imports = [
+    ../../modules/zsh/home.nix
     ../../modules/niri/home.nix
     ../../modules/neovim/home.nix
     ../../modules/yazi/home.nix
     ../../modules/git/home.nix
     ../../modules/zellij/home.nix
-    ../../modules/zsh/home.nix
     ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
     ../../modules/quickshell/home.nix

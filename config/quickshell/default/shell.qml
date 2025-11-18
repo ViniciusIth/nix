@@ -1,8 +1,8 @@
 import Quickshell
-import qs.bar
-import qs.launcher
+import "./bar" as Bar
+import "./launcher" as Launcher
 
 Scope {
-    Bar {}
-    AppLauncher {}
+    Bar.Bar {}
+    Launcher.AppLauncher {}
 }
