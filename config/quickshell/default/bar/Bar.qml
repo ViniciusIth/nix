@@ -1,23 +1,97 @@
 import Quickshell
+import QtQuick
+import QtQuick.Layouts
+import "../components"
+import "../config"
 
-Scope {
-    Variants {
-        model: Quickshell.screens
+Variants {
+    model: Quickshell.screens
 
-        PanelWindow {
-            required property var modelData
-            screen: modelData
+    PanelWindow {
+        id: barWindow
+        required property var modelData
+        screen: modelData
 
+        anchors {
+            left: true
+            top: true
+            bottom: true
+        }
+
+        color: "transparent"
+        exclusiveZone: barContent.contentWidth
+        mask: Region {
+            item: barContent
+        }
+        implicitWidth: barContent.width
+        property real contentWidth: 52
+
+        HuggingRectangle {
+            id: barContent
+            bottomEdge: true
+            topEdge: true
+            leftEdge: true
+            contentHeight: parent.height
+            contentWidth: barWindow.contentWidth
+            backgroundColor: Colourscheme.base
             anchors {
-                top: true
-                left: true
-                bottom: true
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
             }
 
-            ClockWidget {
-                topPadding: 15
-                anchors.horizontalCenter: parent.horizontalCenter
+            ColumnLayout {
+                anchors {
+                    topMargin: 10
+                    top: parent.top
+                    horizontalCenter: parent.horizontalCenter
+                }
+                spacing: 10
+            }
+
+            ColumnLayout {
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+                spacing: 10
+
+                Clock {}
+            }
+
+            ColumnLayout {
+                anchors {
+                    bottomMargin: 10
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
+                spacing: 10
+            }
+        }
+
+        MouseArea {
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+
+            implicitWidth: parent.implicitWidth
+            hoverEnabled: true
+
+            onEntered: {
+                barWindow.visible = true;
+            }
+
+            onExited: {
+                barWindow.visible = false;
             }
         }
     }
+
+    // IpcHandler {
+    //     target: "sidebar"
+    //     function toggle() {
+    //     }
+    // }
 }
