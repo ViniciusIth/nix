@@ -1,6 +1,6 @@
 import Quickshell
 import Quickshell.Widgets
-// import Qt5Compat.GraphicalEffects
+import Qt5Compat.GraphicalEffects
 import QtQuick
 
 Item {
@@ -18,9 +18,9 @@ Item {
         source: Qt.resolvedUrl(Quickshell.shellPath("assets/icons/" + root.source))
     }
 
-    // ColorOverlay {
-    //     anchors.fill: parent
-    //     source: icon
-    //     color: root.color
-    // }
+    ColorOverlay {
+        anchors.fill: parent
+        source: icon
+        color: root.color
+    }
 }

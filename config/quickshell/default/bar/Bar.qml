@@ -57,6 +57,7 @@ Variants {
                 spacing: 10
 
                 Clock {}
+                PowerButton {}
             }
 
             ColumnLayout {

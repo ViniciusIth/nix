@@ -31,6 +31,7 @@ in {
       pkgs.kdePackages.qtbase
       pkgs.kdePackages.qtdeclarative
       pkgs.kdePackages.qtmultimedia
+      pkgs.libsForQt5.qt5.qtgraphicaleffects
       quickshellPackage
     ];
   };

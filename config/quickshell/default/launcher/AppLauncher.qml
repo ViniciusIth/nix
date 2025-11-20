@@ -78,17 +78,20 @@ PanelWindow {
                             launcher.run();
                         } else if (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_J) {
                             launcher.selectedEntry++;
+                            listView.positionViewAtIndex(launcher.selectedEntry, ListView.Contain);
                         } else if (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_K) {
                             launcher.selectedEntry--;
+                            listView.positionViewAtIndex(launcher.selectedEntry, ListView.Contain);
                         }
                     }
                 }
             }
 
             ListView {
+                id: listView
                 model: launcher.visibleEntries
                 spacing: Size.launcherInnerPadding
-                height: 180
+                implicitHeight: 180
                 delegate: Rectangle {
                     width: entry.width
                     height: entry.height + (2 * Size.launcherInnerPadding)
