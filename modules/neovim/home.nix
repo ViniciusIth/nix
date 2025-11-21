@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: {
+  imports = [./go];
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -131,7 +132,6 @@
       zig
       tree-sitter
       cargo
-      unstable.delve
 
       # Clipboard
       wl-clipboard

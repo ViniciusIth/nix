@@ -11,6 +11,7 @@
     unstable.go
     unstable.gopls
     unstable.golangci-lint
+    unstable.delve
   ];
 
   home.sessionVariables = {

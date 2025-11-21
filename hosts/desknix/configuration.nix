@@ -4,9 +4,25 @@
     ../../modules/niri/system.nix
   ];
 
-  # Boot configuration
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot = {
+      enable = true;
+
+      edk2-uefi-shell = {
+        enable = true;
+        sortKey = "z_edk2";
+      };
+
+      windows = {
+        "windows" = let
+          boot-drive = "FS2";
+        in {
+          title = "Windows 11";
+          efiDeviceHandle = boot-drive;
+          sortKey = "y_windows";
+        };
+      };
+    };
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages;
@@ -14,26 +30,23 @@
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
-      # Enable garbage collection
-      # auto-optimise-store = true;
     };
-    # Automatic garbage collection
-    # gc = {
-    # 	automatic = true;
-    # 	dates = "weekly";
-    # 	options = "--delete-older-than 7d";
-    # };
+    optimise = {
+      automatic = true;
+      dates = ["weekly"];
+      persistent = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      persistent = true;
+      options = "--delete-older-than 30d";
+    };
   };
 
   networking = {
     hostName = "desknix";
     networkmanager.enable = true;
-    # Enable firewall
-    # firewall = {
-    # 	enable = true;
-    # 	allowedTCPPorts = [ ];
-    # 	allowedUDPPorts = [ ];
-    # };
   };
 
   services.xserver.displayManager.lightdm.enable = true;

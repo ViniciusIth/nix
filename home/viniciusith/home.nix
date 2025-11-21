@@ -14,7 +14,6 @@ in {
     ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
     ../../modules/quickshell/home.nix
-    ./go
   ];
 
   home.sessionVariables = {
