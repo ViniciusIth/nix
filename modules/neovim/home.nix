@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  inputs,
   ...
 }: {
   programs.neovim = {
@@ -67,6 +66,11 @@
       # UI & Helpers
       which-key-nvim
 
+      nvim-dap
+      nvim-dap-virtual-text
+      nvim-dap-go
+      nvim-dap-view
+
       (nvim-treesitter.withPlugins (p: [
         p.bash
         p.css
@@ -127,6 +131,7 @@
       zig
       tree-sitter
       cargo
+      unstable.delve
 
       # Clipboard
       wl-clipboard
