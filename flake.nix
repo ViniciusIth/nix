@@ -11,6 +11,10 @@
       url = "github:kaylorben/nixcord/db15ef80264e0c9f60aea019b657e3f9523445bd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spicetify = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";

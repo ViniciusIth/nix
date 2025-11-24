@@ -14,6 +14,7 @@ in {
     ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
     ../../modules/quickshell/home.nix
+    ../../modules/spotify/home.nix
   ];
 
   home.sessionVariables = {

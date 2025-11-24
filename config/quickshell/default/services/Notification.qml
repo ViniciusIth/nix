@@ -1,58 +1,93 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
-import Quickshell
 import QtQuick
+import Quickshell
 import Quickshell.Services.Notifications
 
 Singleton {
     id: root
-    property list<var> rawServerNotifications: notificationServer.trackedNotifications.values
-    property list<var> centerNotifications: []
-    property list<var> popupNotifications: []
 
-    onRawServerNotificationsChanged: {
-        root.updateModels();
-    }
+    property ListModel notifications: ListModel {}
+    property ListModel popupNotifications: ListModel {}
 
     NotificationServer {
-        id: notificationServer
+        id: server
+        actionsSupported: true
+        keepOnReload: false
 
         onNotification: notification => {
+            console.log("incoming:", notification.summary, notification.body);
+
             notification.tracked = true;
             notification.popup = true;
-            notificationExpireComponent.createObject(root, {
-                notificationId: notification.id,
-                timeout: notification.expireTimeout > 0 ? notification.expireTimeout : 5_000
-            });
-        }
-    }
 
-    component NotificationExpire: Timer {
-        required property int notificationId
-        required property int timeout
-        interval: timeout
-        running: true
-        onTriggered: () => {
-            const index = popupNotifications.findIndex(notification => notification.id == notificationId);
-            if (index >= 0) {
-                if (popupNotifications[index].desktopEntry === "com.spotify.Client") {
-                    popupNotifications[index].expire();
-                } else {
-                    popupNotifications[index].popup = false;
-                }
-                root.updateModels();
-            }
-            destroy();
-        }
-    }
+            root.addOrUpdateNotification(notification);
 
-    function updateModels() {
-        root.popupNotifications = notificationServer.trackedNotifications.values.filter(notif => notif.popup);
-        root.centerNotifications = notificationServer.trackedNotifications.values.filter(notif => notif.desktopEntry !== "com.spotify.Client");
+            root.scheduleExpiration(notification);
+        }
     }
 
     Component {
-        id: notificationExpireComponent
-        NotificationExpire {}
+        id: expireTimer
+        Timer {
+            required property Notification notification
+            running: true
+            repeat: false
+
+            onTriggered: {
+                console.log("expiring", notification.summary);
+                notification.popup = false;
+                root.updatePopupNotification(notification);
+                Qt.callLater(() => destroy());
+            }
+        }
+    }
+
+    function scheduleExpiration(notification: Notification) {
+        const timeout = notification.expireTimeout > 0 ? notification.expireTimeout : 5000;
+        expireTimer.createObject(root, {
+            notification: notification,
+            interval: timeout
+        });
+    }
+
+    function addOrUpdateNotification(n) {
+        let idx = findById(notifications, n.id);
+        if (idx >= 0) {
+            notifications.set(idx, {
+                n: n
+            });
+        } else {
+            notifications.append({
+                n: n
+            });
+        }
+
+        if (n.popup) {
+            let pidx = findById(popupNotifications, n.id);
+            if (pidx < 0)
+                popupNotifications.append({
+                    n: n
+                });
+            else
+                popupNotifications.set(pidx, {
+                    n: n
+                });
+        }
+    }
+
+    function updatePopupNotification(n) {
+        let idx = findById(popupNotifications, n.id);
+        if (idx >= 0 && !n.popup)
+            popupNotifications.remove(idx);
+    }
+
+    function findById(model, id) {
+        for (let i = 0; i < model.count; i++) {
+            if (model.get(i).n.id === id)
+                return i;
+        }
+        return -1;
     }
 }

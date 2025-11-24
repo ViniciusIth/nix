@@ -113,6 +113,7 @@
     tree
     unzip
     bitwarden-desktop
+    lm_sensors
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -120,7 +121,7 @@
   programs = {
     firefox.enable = true;
     git.enable = true;
-    bash.completion.enable = true;
+    zsh.enable = true;
     gamemode.enable = true;
     xwayland.enable = true;
   };
@@ -140,6 +141,7 @@
       "lp"
       "plugdev"
     ];
+    shell = pkgs.zsh;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
