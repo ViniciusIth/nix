@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [./go];
@@ -16,6 +17,24 @@
 
       # Theme
       catppuccin-nvim
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "techbase";
+        src = pkgs.fetchFromGitHub {
+          owner = "mcauley-penney";
+          repo = "techbase.nvim";
+          rev = "3c908d83ca18d3b3f3cc108555e718aad10d3131";
+          sha256 = "sha256-59h1szBkKteKQdpPu0394pEDEORvLXLS6SsvIk6HM+o=";
+        };
+      })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "kanagawa";
+        src = pkgs.fetchFromGitHub {
+          owner = "rebelot";
+          repo = "kanagawa.nvim";
+          rev = "aef7f5cec0a40dbe7f3304214850c472e2264b10";
+          sha256 = "sha256-nHcQWTX4x4ala6+fvh4EWRVcZMNk5jZiZAwWhw03ExE=";
+        };
+      })
 
       # Navigation & Files
       telescope-nvim

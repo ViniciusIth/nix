@@ -72,6 +72,10 @@
               useUserPackages = true;
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
+
+              sharedModules = [
+                inputs.nixcord.homeModules.nixcord
+              ];
             };
           }
         ];
