@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end, { buffer = bufnr, desc = "Format buffer" })
         end
 
-        local bindOpts = { noremap = true, silent = true }
+        local bindOpts = { noremap = true, silent = true, buffer = event.buf }
         -- Lsp definications, implementations etc
         bindOpts.desc = "Show LSP references"
         vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", bindOpts)
@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bindOpts)
 
         bindOpts.desc = "Show documentation for what is under cursor"
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bindOpts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "rounded", }) end, bindOpts)
     end,
 })
 
