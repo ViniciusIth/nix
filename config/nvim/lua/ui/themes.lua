@@ -76,7 +76,103 @@ require('kanagawa').setup({
         theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
     },
     overrides = function(colors)
-        return {}
+        local palette = colors.palette
+        local theme = colors.theme
+
+        return {
+
+            ---------------------------------------------------------------------
+            -- Menu
+            ---------------------------------------------------------------------
+            BlinkCmpMenu                         = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.fg,
+            },
+
+            BlinkCmpMenuBorder                   = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.float.border,
+            },
+
+            BlinkCmpMenuSelection                = {
+                bg = palette.sumiInk4,
+                fg = theme.ui.fg,
+                bold = true,
+            },
+
+            BlinkCmpScrollBarThumb               = { bg = palette.sumiInk5 },
+            BlinkCmpScrollBarGutter              = { bg = palette.sumiInk3 },
+
+            ---------------------------------------------------------------------
+            -- Labels
+            ---------------------------------------------------------------------
+            BlinkCmpLabel                        = { fg = theme.ui.fg },
+            BlinkCmpLabelMatch                   = { fg = palette.oniViolet, bold = true },
+            BlinkCmpLabelDeprecated              = { fg = palette.katanaGray, strikethrough = true },
+            BlinkCmpLabelDetail                  = { fg = palette.sumiInk6 },
+            BlinkCmpLabelDescription             = { fg = palette.sumiInk6 },
+
+            BlinkCmpSource                       = { fg = palette.sumiInk5 },
+
+            ---------------------------------------------------------------------
+            -- Kinds
+            ---------------------------------------------------------------------
+            BlinkCmpKind                         = { fg = palette.oniViolet }, -- fallback
+
+            BlinkCmpKindFunction                 = { fg = palette.waveAqua2 },
+            BlinkCmpKindMethod                   = { fg = palette.waveAqua2 },
+            BlinkCmpKindField                    = { fg = palette.sakuraPink },
+            BlinkCmpKindProperty                 = { fg = palette.sakuraPink },
+            BlinkCmpKindVariable                 = { fg = palette.carpYellow },
+            BlinkCmpKindClass                    = { fg = palette.peachRed },
+            BlinkCmpKindStruct                   = { fg = palette.peachRed },
+            BlinkCmpKindModule                   = { fg = palette.springGreen },
+            BlinkCmpKindKeyword                  = { fg = palette.oniViolet },
+            BlinkCmpKindSnippet                  = {
+                fg = palette.fujiWhite,
+                bg = palette.sumiInk5,
+                italic = true,
+            },
+
+            ---------------------------------------------------------------------
+            -- Documentation Window
+            ---------------------------------------------------------------------
+            BlinkCmpDoc                          = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.fg,
+            },
+
+            BlinkCmpDocBorder                    = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.float.border,
+            },
+
+            BlinkCmpDocSeparator                 = {
+                fg = palette.sumiInk4,
+            },
+
+            BlinkCmpDocCursorLine                = {
+                bg = palette.sumiInk4,
+            },
+
+            ---------------------------------------------------------------------
+            -- Signature Help
+            ---------------------------------------------------------------------
+            BlinkCmpSignatureHelp                = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.fg,
+            },
+
+            BlinkCmpSignatureHelpBorder          = {
+                bg = palette.sumiInk2,
+                fg = theme.ui.float.border,
+            },
+
+            BlinkCmpSignatureHelpActiveParameter = {
+                fg = palette.peachRed,
+                bold = true,
+            },
+        }
     end,
     theme = "dragon",
     background = {

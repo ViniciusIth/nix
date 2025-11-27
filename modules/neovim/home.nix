@@ -90,6 +90,7 @@
       nvim-dap-virtual-text
       nvim-dap-go
       nvim-dap-view
+      blink-cmp
 
       (nvim-treesitter.withPlugins (p: [
         p.bash

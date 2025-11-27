@@ -12,40 +12,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
 
-        if client and client:supports_method("textDocument/completion") then
-            vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "fuzzy", "popup" }
-            vim.lsp.completion.enable(true, client.id, event.buf, {
-                autotrigger = true,
-                option = {
-                    border = "rounded",
-                }
-            })
-
-            vim.keymap.set("i", "<C-Space>", function()
-                vim.lsp.completion.get()
-            end, { desc = "Trigger LSP completion", noremap = true, silent = true })
-
-            vim.keymap.set("i", "<CR>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return vim.fn["complete_info"]()["selected"] ~= -1 and "<C-y>" or "<C-e>"
-                end
-                return "<CR>"
-            end, { expr = true, noremap = true, silent = true })
-
-            vim.keymap.set("i", "<Tab>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return "<C-n>"
-                end
-                return "<Tab>"
-            end, { expr = true, noremap = true, silent = true })
-
-            vim.keymap.set("i", "<S-Tab>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return "<C-p>"
-                end
-                return "<S-Tab>"
-            end, { expr = true, noremap = true, silent = true })
-        end
+        -- Currently native completion isn't that good
+        -- if client and client:supports_method("textDocument/completion") then
+        --     vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "fuzzy", "popup" }
+        --     vim.lsp.completion.enable(true, client.id, event.buf, {
+        --         autotrigger = true,
+        --         option = {
+        --             border = "rounded",
+        --         }
+        --     })
+        --
+        --     vim.keymap.set("i", "<C-Space>", function()
+        --         vim.lsp.completion.get()
+        --     end, { desc = "Trigger LSP completion", noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<CR>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return vim.fn["complete_info"]()["selected"] ~= -1 and "<C-y>" or "<C-e>"
+        --         end
+        --         return "<CR>"
+        --     end, { expr = true, noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<Tab>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return "<C-n>"
+        --         end
+        --         return "<Tab>"
+        --     end, { expr = true, noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<S-Tab>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return "<C-p>"
+        --         end
+        --         return "<S-Tab>"
+        --     end, { expr = true, noremap = true, silent = true })
+        -- end
 
         if client and client:supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
