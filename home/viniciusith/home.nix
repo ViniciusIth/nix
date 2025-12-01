@@ -1,4 +1,8 @@
-{osConfig, ...}: let
+{
+  osConfig,
+  pkgs,
+  ...
+}: let
   hostname = osConfig.networking.hostName or "unknown";
 in {
   home.username = "viniciusith";
@@ -15,6 +19,12 @@ in {
     ../../modules/git/home.nix
     ../../modules/quickshell/home.nix
     ../../modules/spotify/home.nix
+    ../../modules/vivaldi/home.nix
+    ../../modules/telegram.nix
+    ../../modules/affinity.nix
+  ];
+  home.packages = with pkgs; [
+    unstable.imv
   ];
 
   home.sessionVariables = {
