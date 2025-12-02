@@ -13,7 +13,7 @@
   };
 
   xdg.configFile."yazi" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/viniciusith/nixos-dotfiles/config/yazi";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/viniciusith/dotfiles/config/yazi";
     recursive = true;
   };
 

@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -20,6 +21,7 @@
 
     initContent = lib.mkOrder 1200 "
         source ~/.p10k.zsh
+        fastfetch
     ";
 
     plugins = [
@@ -29,5 +31,14 @@
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
     ];
+  };
+
+  home.packages = with pkgs; [
+    fastfetch
+  ];
+
+  xdg.configFile."fastfetch" = {
+    source = config.lib.file.mkOutOfStoreSymlink "/home/viniciusith/dotfiles/config/fastfetch";
+    recursive = true;
   };
 }
