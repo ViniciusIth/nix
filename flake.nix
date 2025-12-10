@@ -15,9 +15,9 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     affinity-nix = {
       url = "github:mrshmllow/affinity-nix";
@@ -50,10 +50,6 @@
               useUserPackages = true;
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
-
-              sharedModules = [
-                inputs.nixcord.homeModules.nixcord
-              ];
             };
           }
         ];
@@ -76,10 +72,6 @@
               useUserPackages = true;
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
-
-              sharedModules = [
-                inputs.nixcord.homeModules.nixcord
-              ];
             };
           }
         ];

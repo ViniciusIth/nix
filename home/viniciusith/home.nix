@@ -17,14 +17,17 @@ in {
     ../../modules/zellij/home.nix
     ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
-    ../../modules/quickshell/home.nix
     ../../modules/spotify/home.nix
     ../../modules/vivaldi/home.nix
     ../../modules/telegram.nix
-    ../../modules/affinity.nix
+    ../../modules/gimp.nix
+    ../../modules/onagre.nix
+    ../../modules/prism.nix
+    ../../modules/noctalia.nix
   ];
   home.packages = with pkgs; [
     unstable.imv
+    pop-launcher
   ];
 
   home.sessionVariables = {

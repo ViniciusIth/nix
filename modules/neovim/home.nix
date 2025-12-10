@@ -4,7 +4,11 @@
   lib,
   ...
 }: {
-  imports = [./go];
+  imports = [
+    ./go
+    ./python.nix
+  ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -152,6 +156,11 @@
       zig
       tree-sitter
       cargo
+
+      # Python
+      pyright
+      ruff
+      black
 
       # Clipboard
       wl-clipboard

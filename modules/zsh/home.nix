@@ -33,8 +33,17 @@
     ];
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   home.packages = with pkgs; [
     fastfetch
+    fzf
+    v4l-utils
+    ffmpeg
+    zoxide
   ];
 
   xdg.configFile."fastfetch" = {

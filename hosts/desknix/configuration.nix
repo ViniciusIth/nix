@@ -78,6 +78,8 @@
 
   services.openssh.enable = true;
   services.printing.enable = true;
+  services.tuned.enable = true;
+  services.upower.enable = true;
 
   # Fonts
   fonts = {
@@ -114,8 +116,21 @@
     unzip
     bitwarden-desktop
     lm_sensors
+
+    docker-compose
   ];
+
+  virtualisation.docker = {
+    enable = true;
+  };
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   # Programs
   programs = {

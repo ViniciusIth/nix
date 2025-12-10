@@ -57,10 +57,8 @@ layout {
     }
 }
 
-spawn-at-startup "waybar"
-
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+spawn-sh-at-startup "noctalia-shell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -103,8 +101,8 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Mod+D hotkey-overlay-title="Run an Application: firefox" { spawn "firefox"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+D hotkey-overlay-title="Open app launcher" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    Mod+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
 
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
@@ -132,6 +130,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
 
     Mod+Q repeat=false { close-window; }
+    
 
     Mod+H    { focus-column-or-monitor-left; }
     Mod+J    { focus-window-or-workspace-down; }
@@ -280,7 +279,7 @@ binds {
     // Makes the column "fill the rest of the space".
     Mod+Ctrl+F { expand-column-to-available-width; }
 
-    Mod+C { center-column; }
+    Mod+Shift+C { center-column; }
 
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
