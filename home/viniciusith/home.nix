@@ -15,13 +15,13 @@ in {
     ../../modules/yazi/home.nix
     ../../modules/git/home.nix
     ../../modules/zellij/home.nix
-    ../../modules/nixcord/home.nix
     ../../modules/git/home.nix
-    ../../modules/quickshell/home.nix
-    ../../modules/spotify/home.nix
-    ../../modules/vivaldi/home.nix
-    ../../modules/telegram.nix
-    ../../modules/affinity.nix
+    # ../../modules/nixcord/home.nix
+    # ../../modules/quickshell/home.nix
+    # ../../modules/spotify/home.nix
+    # ../../modules/vivaldi/home.nix
+    # ../../modules/telegram.nix
+    # ../../modules/affinity.nix
   ];
   home.packages = with pkgs; [
     unstable.imv
