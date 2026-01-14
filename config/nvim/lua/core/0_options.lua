@@ -27,3 +27,5 @@ o.hlsearch   = false
 o.showmode   = false
 o.scrolloff  = 4
 o.splitright = true
+
+o.fileformat = "unix"
