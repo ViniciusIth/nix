@@ -35,7 +35,11 @@ vim.pack.add({
   { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
   { src = "https://github.com/leoluz/nvim-dap-go" },
   { src = "https://github.com/igorlfs/nvim-dap-view" },
-  { src = "https://github.com/saghen/blink.cmp" },
+  
+  {
+    src = "https://github.com/saghen/blink.cmp", 
+    version = vim.version.range('*') 
+  },
 })
 
 require("modules")

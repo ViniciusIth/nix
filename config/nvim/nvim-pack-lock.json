@@ -6,7 +6,8 @@
     },
     "blink.cmp": {
       "rev": "b1b77404ce3c8b11e8f35611a28176b944c41e29",
-      "src": "https://github.com/saghen/blink.cmp"
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": ">=0.0.0"
     },
     "flash.nvim": {
       "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
