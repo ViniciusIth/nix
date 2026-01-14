@@ -4,6 +4,11 @@
   lib,
   ...
 }: {
+  imports = [
+    ./go
+    ./python.nix
+  ];
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -11,11 +16,29 @@
     defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
-      # Icons (only need once)
+      # Icons
       nvim-web-devicons
 
       # Theme
       catppuccin-nvim
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "techbase";
+        src = pkgs.fetchFromGitHub {
+          owner = "mcauley-penney";
+          repo = "techbase.nvim";
+          rev = "3c908d83ca18d3b3f3cc108555e718aad10d3131";
+          sha256 = "sha256-59h1szBkKteKQdpPu0394pEDEORvLXLS6SsvIk6HM+o=";
+        };
+      })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "kanagawa";
+        src = pkgs.fetchFromGitHub {
+          owner = "rebelot";
+          repo = "kanagawa.nvim";
+          rev = "aef7f5cec0a40dbe7f3304214850c472e2264b10";
+          sha256 = "sha256-nHcQWTX4x4ala6+fvh4EWRVcZMNk5jZiZAwWhw03ExE=";
+        };
+      })
 
       # Navigation & Files
       telescope-nvim
@@ -67,6 +90,12 @@
       # UI & Helpers
       which-key-nvim
 
+      nvim-dap
+      nvim-dap-virtual-text
+      nvim-dap-go
+      nvim-dap-view
+      blink-cmp
+
       (nvim-treesitter.withPlugins (p: [
         p.bash
         p.css
@@ -93,6 +122,7 @@
         p.nix
         p.proto
         p.python
+        p.qmljs
         p.rust
         p.sql
         p.templ
@@ -127,7 +157,12 @@
       tree-sitter
       cargo
 
-      # clipboard
+      # Python
+      pyright
+      ruff
+      black
+
+      # Clipboard
       wl-clipboard
     ];
   };

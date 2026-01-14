@@ -13,11 +13,11 @@
   };
 
   xdg.configFile."yazi" = {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/viniciusith/nixos-dotfiles/config/yazi";
+    source = config.lib.file.mkOutOfStoreSymlink "/home/viniciusith/dotfiles/config/yazi";
     recursive = true;
   };
 
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = lib.mkOrder 1000 ''
     y() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
       yazi "$@" --cwd-file="$tmp"

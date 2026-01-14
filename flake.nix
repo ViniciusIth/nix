@@ -2,28 +2,33 @@
   description = "NixOS";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # quickshell = {
-    #   # add ?ref=<tag> to track a tag
-    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # ghostty = {
-    #   url = "github:ghostty-org/ghostty";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nixcord = {
+      url = "github:kaylorben/nixcord/db15ef80264e0c9f60aea019b657e3f9523445bd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    affinity-nix = {
+      url = "github:mrshmllow/affinity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     ...
   }: {
@@ -32,30 +37,39 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
+          {nixpkgs.overlays = [(import ./overlays/unstable.nix {inherit inputs;})];}
+
           ./hosts/desknix/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              extraSpecialArgs = {
+                inherit inputs;
+              };
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
             };
           }
         ];
       };
+
       wslnix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
+          {nixpkgs.overlays = [(import ./overlays/unstable.nix {inherit inputs;})];}
+
           ./hosts/wslnix/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              extraSpecialArgs = {
+                inherit inputs;
+              };
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = {inherit inputs;};
               users.viniciusith = import ./home/viniciusith/home.nix;
               backupFileExtension = "backup";
             };

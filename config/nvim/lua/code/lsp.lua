@@ -1,6 +1,7 @@
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("nil")
+vim.lsp.enable("qmlls")
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
@@ -11,40 +12,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end
 
-        if client and client:supports_method("textDocument/completion") then
-            vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "fuzzy", "popup" }
-            vim.lsp.completion.enable(true, client.id, event.buf, {
-                autotrigger = true,
-                option = {
-                    border = "rounded",
-                }
-            })
-
-            vim.keymap.set("i", "<C-Space>", function()
-                vim.lsp.completion.get()
-            end, { desc = "Trigger LSP completion", noremap = true, silent = true })
-
-            vim.keymap.set("i", "<CR>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return vim.fn["complete_info"]()["selected"] ~= -1 and "<C-y>" or "<C-e>"
-                end
-                return "<CR>"
-            end, { expr = true, noremap = true, silent = true })
-
-            vim.keymap.set("i", "<Tab>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return "<C-n>"
-                end
-                return "<Tab>"
-            end, { expr = true, noremap = true, silent = true })
-
-            vim.keymap.set("i", "<S-Tab>", function()
-                if vim.fn.pumvisible() == 1 then
-                    return "<C-p>"
-                end
-                return "<S-Tab>"
-            end, { expr = true, noremap = true, silent = true })
-        end
+        -- Currently native completion isn't that good
+        -- if client and client:supports_method("textDocument/completion") then
+        --     vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "fuzzy", "popup" }
+        --     vim.lsp.completion.enable(true, client.id, event.buf, {
+        --         autotrigger = true,
+        --         option = {
+        --             border = "rounded",
+        --         }
+        --     })
+        --
+        --     vim.keymap.set("i", "<C-Space>", function()
+        --         vim.lsp.completion.get()
+        --     end, { desc = "Trigger LSP completion", noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<CR>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return vim.fn["complete_info"]()["selected"] ~= -1 and "<C-y>" or "<C-e>"
+        --         end
+        --         return "<CR>"
+        --     end, { expr = true, noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<Tab>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return "<C-n>"
+        --         end
+        --         return "<Tab>"
+        --     end, { expr = true, noremap = true, silent = true })
+        --
+        --     vim.keymap.set("i", "<S-Tab>", function()
+        --         if vim.fn.pumvisible() == 1 then
+        --             return "<C-p>"
+        --         end
+        --         return "<S-Tab>"
+        --     end, { expr = true, noremap = true, silent = true })
+        -- end
 
         if client and client:supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
@@ -59,7 +61,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end, { buffer = bufnr, desc = "Format buffer" })
         end
 
-        local bindOpts = { noremap = true, silent = true }
+        local bindOpts = { noremap = true, silent = true, buffer = event.buf }
         -- Lsp definications, implementations etc
         bindOpts.desc = "Show LSP references"
         vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", bindOpts)
@@ -91,7 +93,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bindOpts)
 
         bindOpts.desc = "Show documentation for what is under cursor"
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bindOpts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "rounded", }) end, bindOpts)
     end,
 })
 
