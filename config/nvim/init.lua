@@ -28,9 +28,17 @@ vim.pack.add({
   },
   { src = "https://github.com/folke/which-key.nvim" },
 
+  { 
+    src = "https://github.com/nvim-treesitter/nvim-treesitter", 
+    version = "main" 
+  },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+  { 
+    src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", 
+    version = "main" 
+  },
   { src = "https://github.com/numToStr/Comment.nvim" },
   { src = "https://github.com/kylechui/nvim-surround" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
   { src = "https://github.com/leoluz/nvim-dap-go" },

@@ -3,6 +3,9 @@ vim.lsp.enable("gopls")
 vim.lsp.enable("nil")
 vim.lsp.enable("qmlls")
 
+vim.lsp.enable("ruff")
+vim.lsp.enable("python")
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)
