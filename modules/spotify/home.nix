@@ -1,8 +1,6 @@
 {
   pkgs,
   inputs,
-  config,
-  lib,
   ...
 }: let
   spicetifyPkg = inputs.spicetify.legacyPackages.${pkgs.stdenv.hostPlatform.system};
@@ -13,6 +11,6 @@ in {
 
   programs.spicetify = {
     enable = true;
-    theme = spicetifyPkg.themes.dribbblish;
+    theme = spicetifyPkg.themes.bloom;
   };
 }

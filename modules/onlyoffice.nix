@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    prismlauncher
-    jdk21
+    onlyoffice-bin
   ];
 }

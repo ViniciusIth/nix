@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/niri/system.nix
@@ -27,6 +31,8 @@
   };
   boot.kernelPackages = pkgs.linuxPackages;
 
+  powerManagement.enable = true;
+
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
@@ -49,12 +55,30 @@
     networkmanager.enable = true;
   };
 
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
+  '';
+
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.enable = true;
 
   # Auto mount hd
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  security.polkit.enable = true;
+  # Allow udisks2 to mount devices without authentication
+  # for users in the "wheel" group.
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if ((action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+           action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+           action.id == "org.freedesktop.udisks2.encrypted-unlock-system" ||
+           action.id == "org.freedesktop.udisks2.encrypted-unlock") &&
+           subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   time.timeZone = "America/Sao_Paulo";
 
@@ -74,10 +98,15 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
 
   services.openssh.enable = true;
   services.printing.enable = true;
+  hardware.sane = {
+    enable = true;
+    extraBackends = [pkgs.epkowa];
+  };
   services.tuned.enable = true;
   services.upower.enable = true;
 
@@ -100,6 +129,13 @@
     };
   };
 
+  services.transmission = {
+    enable = true;
+    settings = {
+      download-dir = "${config.services.transmission.home}/Downloads";
+    };
+  };
+
   # System packages
   environment.systemPackages = with pkgs; [
     vim
@@ -118,6 +154,17 @@
     lm_sensors
 
     docker-compose
+    xwayland-satellite
+    pulseaudio
+    quickemu
+    qemu
+
+    transmission_4-qt
+    (ventoy.override {
+      defaultGuiType = "qt5";
+      withQt5 = true;
+    })
+    caligula
   ];
 
   virtualisation.docker = {
@@ -129,7 +176,11 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [
+      pkgs.xdg-desktop-portal
+      pkgs.kdePackages.xdg-desktop-portal-kde
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   # Programs
@@ -143,6 +194,10 @@
 
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-qt5-1.1.05"
+  ];
+  networking.firewall.enable = false;
 
   users.users.viniciusith = {
     isNormalUser = true;
@@ -153,6 +208,7 @@
       "networkmanager"
       "video"
       "audio"
+      "scanner"
       "lp"
       "plugdev"
     ];

@@ -21,9 +21,10 @@ in {
     ../../modules/vivaldi/home.nix
     ../../modules/telegram.nix
     ../../modules/gimp.nix
-    ../../modules/onagre.nix
     ../../modules/prism.nix
     ../../modules/noctalia.nix
+    ../../modules/vscode.nix
+    ../../modules/obsidian.nix
   ];
   home.packages = with pkgs; [
     unstable.imv
